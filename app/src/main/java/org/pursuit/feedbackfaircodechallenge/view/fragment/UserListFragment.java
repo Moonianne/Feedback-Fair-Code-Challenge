@@ -16,17 +16,9 @@ import org.pursuit.feedbackfaircodechallenge.R;
 import org.pursuit.feedbackfaircodechallenge.controller.RetrofitController;
 import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
 import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListener;
-import org.pursuit.feedbackfaircodechallenge.model.User;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 public final class UserListFragment extends Fragment {
     private OnFragmentInteractionListener onFragmentInteractionListener;
-
-    public static UserListFragment newInstance() {
-        return new UserListFragment();
-    }
 
     @Override
     public void onAttach(Context context) {

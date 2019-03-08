@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">Feedback Fair Code Challenge</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="call_button">Call</string>
     <string name="email_button">Email</string>
     <string name="phone_string">Phone: %1$s</string>
     <string name="email_string">Email: %1$s</string>
-
 </resources>
