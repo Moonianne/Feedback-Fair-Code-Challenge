@@ -22,13 +22,6 @@ public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         this.users = users;
     }
 
-    static UserAdapter getInstance() {
-        if (instance == null) {
-            instance = new UserAdapter(new ArrayList<User>(), null);
-        }
-        return instance;
-    }
-
     public static UserAdapter getInstance(OnFragmentInteractionListener onFragmentInteractionListener) {
         if (instance == null) {
             instance = new UserAdapter(new ArrayList<User>(), onFragmentInteractionListener);

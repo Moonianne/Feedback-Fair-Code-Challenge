@@ -30,7 +30,7 @@ public final class RetrofitController {
         return instance;
     }
 
-    public void getCallBack() {
+    public void getCallBack(final UserAdapter adapter) {
         UserRetrofit.getInstance()
                 .create(UserService.class)
                 .getUsers()
@@ -38,8 +38,11 @@ public final class RetrofitController {
                     @Override
                     public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
                         userList = response.body();
-                        Log.d(TAG, "onResponse: " + userList.get(0).name);
-                        UserAdapter.getInstance().updateList((ArrayList<User>) userList);
+                        if (userList != null) {
+                            adapter.updateList((ArrayList<User>) userList);
+                        } else {
+                            throw new RuntimeException("User List not received.");
+                        }
                     }
 
                     @Override

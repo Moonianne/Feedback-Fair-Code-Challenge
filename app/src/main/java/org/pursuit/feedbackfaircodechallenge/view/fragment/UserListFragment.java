@@ -19,6 +19,7 @@ import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListe
 
 public final class UserListFragment extends Fragment {
     private OnFragmentInteractionListener onFragmentInteractionListener;
+    private UserAdapter userAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -35,14 +36,13 @@ public final class UserListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setupRecyclerView(view);
-        RetrofitController.getInstance().getCallBack();
+        RetrofitController.getInstance().getCallBack(userAdapter);
     }
 
     private void setupRecyclerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.users_view);
-        UserAdapter userAdapter = UserAdapter.getInstance(onFragmentInteractionListener);
+        userAdapter = UserAdapter.getInstance(onFragmentInteractionListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
     }
