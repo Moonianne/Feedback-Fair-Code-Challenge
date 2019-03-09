@@ -17,6 +17,6 @@ public final class ListActivity extends AppCompatActivity implements OnFragmentI
 
     @Override
     public void viewUser(final User user) {
-        UserActivity.LaunchActivity(this, user);
+        startActivity(UserActivity.newIntent(this, user));
     }
 }

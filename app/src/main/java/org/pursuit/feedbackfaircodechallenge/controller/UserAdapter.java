@@ -13,7 +13,7 @@ import org.pursuit.feedbackfaircodechallenge.view.viewholder.UserViewHolder;
 import java.util.ArrayList;
 
 public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
-    private OnFragmentInteractionListener onFragmentInteractionListener;
+    private final OnFragmentInteractionListener onFragmentInteractionListener;
     private static UserAdapter instance;
     private ArrayList<User> users;
 

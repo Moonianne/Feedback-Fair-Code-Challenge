@@ -13,19 +13,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public final class RetrofitController {
-    private static final String TAG = "RetrofitController.GEO";
+public final class UserRepository {
+    private static final String TAG = "UserRepository.GEO";
 
-    private static RetrofitController instance;
+    private static UserRepository instance;
 
     private List<User> userList;
 
-    private RetrofitController() {
+    private UserRepository() {
     }
 
-    public static RetrofitController getInstance() {
+    public static UserRepository getInstance() {
         if (instance == null) {
-            instance = new RetrofitController();
+            instance = new UserRepository();
         }
         return instance;
     }

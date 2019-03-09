@@ -23,12 +23,12 @@ public final class UserActivity extends AppCompatActivity implements View.OnClic
     private String phone;
     private String email;
 
-    public static void LaunchActivity(Context context, User user) {
+    public static Intent newIntent(Context context, User user) {
         Intent intent = new Intent(context, UserActivity.class);
         intent.putExtra(NAME_KEY, user.name);
         intent.putExtra(PHONE_KEY, user.phone);
         intent.putExtra(EMAIL_KEY, user.email);
-        context.startActivity(intent);
+        return intent;
     }
 
     @Override

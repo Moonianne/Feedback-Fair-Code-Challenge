@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.pursuit.feedbackfaircodechallenge.R;
-import org.pursuit.feedbackfaircodechallenge.controller.RetrofitController;
+import org.pursuit.feedbackfaircodechallenge.controller.UserRepository;
 import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
 import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListener;
 
@@ -24,7 +24,11 @@ public final class UserListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        onFragmentInteractionListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            onFragmentInteractionListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException("Need to implement OnFragmentInteractionListener in host activity.");
+        }
     }
 
     @Override
@@ -37,7 +41,7 @@ public final class UserListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView(view);
-        RetrofitController.getInstance().getCallBack(userAdapter);
+        UserRepository.getInstance().getCallBack(userAdapter);
     }
 
     private void setupRecyclerView(@NonNull View view) {
