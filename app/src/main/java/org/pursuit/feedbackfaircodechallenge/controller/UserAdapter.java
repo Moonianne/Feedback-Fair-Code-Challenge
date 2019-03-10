@@ -14,19 +14,11 @@ import java.util.ArrayList;
 
 public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     private final OnFragmentInteractionListener onFragmentInteractionListener;
-    private static UserAdapter instance;
     private ArrayList<User> users;
 
-    private UserAdapter(ArrayList<User> users, OnFragmentInteractionListener onFragmentInteractionListener) {
+    public UserAdapter(ArrayList<User> users, OnFragmentInteractionListener onFragmentInteractionListener) {
         this.onFragmentInteractionListener = onFragmentInteractionListener;
         this.users = users;
-    }
-
-    public static UserAdapter getInstance(OnFragmentInteractionListener onFragmentInteractionListener) {
-        if (instance == null) {
-            instance = new UserAdapter(new ArrayList<User>(), onFragmentInteractionListener);
-        }
-        return instance;
     }
 
     @NonNull
@@ -46,7 +38,7 @@ public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         return users.size();
     }
 
-    void updateList(ArrayList<User> newList) {
+    public void updateList(ArrayList<User> newList) {
         users = newList;
         notifyDataSetChanged();
     }

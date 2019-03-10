@@ -17,11 +17,6 @@ public final class UserViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(final User user, final OnFragmentInteractionListener onFragmentInteractionListener) {
         itemView.<TextView>findViewById(R.id.recycler_user_name).setText(user.name);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFragmentInteractionListener.viewUser(user);
-            }
-        });
+        itemView.setOnClickListener(v -> onFragmentInteractionListener.viewUser(user));
     }
 }

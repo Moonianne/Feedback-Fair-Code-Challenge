@@ -16,6 +16,9 @@ import org.pursuit.feedbackfaircodechallenge.R;
 import org.pursuit.feedbackfaircodechallenge.controller.UserRepository;
 import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
 import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListener;
+import org.pursuit.feedbackfaircodechallenge.model.User;
+
+import java.util.ArrayList;
 
 public final class UserListFragment extends Fragment {
     private OnFragmentInteractionListener onFragmentInteractionListener;
@@ -42,11 +45,12 @@ public final class UserListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView(view);
         UserRepository.getInstance().getCallBack(userAdapter);
+        userAdapter.updateList(UserRepository.getInstance().getCallBack());
     }
 
     private void setupRecyclerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.users_view);
-        userAdapter = UserAdapter.getInstance(onFragmentInteractionListener);
+        userAdapter = new UserAdapter(new ArrayList<User>(), onFragmentInteractionListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
     }
