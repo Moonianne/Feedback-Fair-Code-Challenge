@@ -45,12 +45,11 @@ public final class UserListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView(view);
         UserRepository.getInstance().getCallBack(userAdapter);
-        userAdapter.updateList(UserRepository.getInstance().getCallBack());
     }
 
     private void setupRecyclerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.users_view);
-        userAdapter = new UserAdapter(new ArrayList<User>(), onFragmentInteractionListener);
+        userAdapter = new UserAdapter(new ArrayList<>(), onFragmentInteractionListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
     }
