@@ -6,18 +6,18 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import org.pursuit.feedbackfaircodechallenge.R;
-import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListener;
+import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
 import org.pursuit.feedbackfaircodechallenge.model.User;
 import org.pursuit.feedbackfaircodechallenge.view.viewholder.UserViewHolder;
 
 import java.util.ArrayList;
 
 public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
-    private final OnFragmentInteractionListener onFragmentInteractionListener;
+    private final OnUserListClickListener onUserListClickListener;
     private ArrayList<User> users;
 
-    public UserAdapter(ArrayList<User> users, OnFragmentInteractionListener onFragmentInteractionListener) {
-        this.onFragmentInteractionListener = onFragmentInteractionListener;
+    public UserAdapter(ArrayList<User> users, OnUserListClickListener onUserListClickListener) {
+        this.onUserListClickListener = onUserListClickListener;
         this.users = users;
     }
 
@@ -30,7 +30,7 @@ public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int i) {
-        userViewHolder.onBind(users.get(i), onFragmentInteractionListener);
+        userViewHolder.onBind(users.get(i), onUserListClickListener);
     }
 
     @Override

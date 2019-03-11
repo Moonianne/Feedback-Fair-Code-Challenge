@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.pursuit.feedbackfaircodechallenge.R;
-import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListener;
+import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
 import org.pursuit.feedbackfaircodechallenge.model.User;
 
 public final class UserViewHolder extends RecyclerView.ViewHolder {
@@ -15,8 +15,8 @@ public final class UserViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void onBind(final User user, final OnFragmentInteractionListener onFragmentInteractionListener) {
+    public void onBind(final User user, final OnUserListClickListener onUserListClickListener) {
         itemView.<TextView>findViewById(R.id.recycler_user_name).setText(user.name);
-        itemView.setOnClickListener(v -> onFragmentInteractionListener.viewUser(user));
+        itemView.setOnClickListener(v -> onUserListClickListener.viewUser(user));
     }
 }

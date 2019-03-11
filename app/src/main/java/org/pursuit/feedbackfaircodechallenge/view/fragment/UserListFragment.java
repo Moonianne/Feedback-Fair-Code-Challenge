@@ -15,22 +15,21 @@ import android.view.ViewGroup;
 import org.pursuit.feedbackfaircodechallenge.R;
 import org.pursuit.feedbackfaircodechallenge.controller.UserRepository;
 import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
-import org.pursuit.feedbackfaircodechallenge.listener.OnFragmentInteractionListener;
-import org.pursuit.feedbackfaircodechallenge.model.User;
+import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
 
 import java.util.ArrayList;
 
 public final class UserListFragment extends Fragment {
-    private OnFragmentInteractionListener onFragmentInteractionListener;
+    private OnUserListClickListener onUserListClickListener;
     private UserAdapter userAdapter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            onFragmentInteractionListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnUserListClickListener) {
+            onUserListClickListener = (OnUserListClickListener) context;
         } else {
-            throw new RuntimeException("Need to implement OnFragmentInteractionListener in host activity.");
+            throw new RuntimeException("Need to implement OnUserListClickListener in host activity.");
         }
     }
 
@@ -49,7 +48,7 @@ public final class UserListFragment extends Fragment {
 
     private void setupRecyclerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.users_view);
-        userAdapter = new UserAdapter(new ArrayList<>(), onFragmentInteractionListener);
+        userAdapter = new UserAdapter(new ArrayList<>(), onUserListClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
     }
