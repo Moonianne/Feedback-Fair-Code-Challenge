@@ -11,10 +11,11 @@ import org.pursuit.feedbackfaircodechallenge.model.User;
 import org.pursuit.feedbackfaircodechallenge.view.viewholder.UserViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     private final OnUserListClickListener onUserListClickListener;
-    private ArrayList<User> users;
+    private List<User> users;
 
     public UserAdapter(ArrayList<User> users, OnUserListClickListener onUserListClickListener) {
         this.onUserListClickListener = onUserListClickListener;
@@ -38,7 +39,7 @@ public final class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         return users.size();
     }
 
-    public void updateList(ArrayList<User> newList) {
+    public void updateList(List<User> newList) {
         users = newList;
         notifyDataSetChanged();
     }
