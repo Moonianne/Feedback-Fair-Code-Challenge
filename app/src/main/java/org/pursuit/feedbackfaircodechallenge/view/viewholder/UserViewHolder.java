@@ -25,7 +25,7 @@ public final class UserViewHolder extends RecyclerView.ViewHolder {
     public void onBind(final User user, final OnUserListClickListener onUserListClickListener) {
         itemView.<TextView>findViewById(R.id.recycler_user_name).setText(user.name);
         RxView.clicks(itemView)
-                .debounce(200L, TimeUnit.MILLISECONDS)
+                .debounce(300L, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
                 .map(click -> user)
                 .observeOn(AndroidSchedulers.mainThread())
