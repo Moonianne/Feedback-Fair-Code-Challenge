@@ -55,7 +55,10 @@ public final class UserListFragment extends Fragment {
         UserAdapter userAdapter = new UserAdapter(onUserListClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
+        getUsersFromNetwork(userAdapter);
+    }
 
+    private void getUsersFromNetwork(UserAdapter userAdapter) {
         UserController.getInstance()
                 .callUserList()
                 .observeOn(AndroidSchedulers.mainThread())
