@@ -22,8 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import retrofit2.HttpException;
 
 public final class UserListFragment extends Fragment {
     private OnUserListClickListener onUserListClickListener;
