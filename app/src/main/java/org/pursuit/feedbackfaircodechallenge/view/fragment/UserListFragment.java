@@ -1,6 +1,6 @@
 package org.pursuit.feedbackfaircodechallenge.view.fragment;
 
-
+import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,23 +13,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.pursuit.feedbackfaircodechallenge.R;
-import org.pursuit.feedbackfaircodechallenge.controller.UserRepository;
+import org.pursuit.feedbackfaircodechallenge.controller.UserController;
 import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
 import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
+import org.pursuit.feedbackfaircodechallenge.model.User;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import retrofit2.HttpException;
 
 public final class UserListFragment extends Fragment {
     private OnUserListClickListener onUserListClickListener;
-    private UserAdapter userAdapter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        UserController.getInstance().callUserList();
         if (context instanceof OnUserListClickListener) {
             onUserListClickListener = (OnUserListClickListener) context;
         } else {
-            throw new RuntimeException("Need to implement OnUserListClickListener in host activity.");
+            throw new RuntimeException(
+                    "Need to implement OnUserListClickListener in host activity.");
         }
     }
 
@@ -43,13 +50,28 @@ public final class UserListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView(view);
-        UserRepository.getInstance().getCallBack(userAdapter);
     }
 
     private void setupRecyclerView(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.users_view);
-        userAdapter = new UserAdapter(new ArrayList<>(), onUserListClickListener);
+        UserAdapter userAdapter = new UserAdapter(onUserListClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
+
+        UserController.getInstance()
+                .callUserList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(newList -> userAdapter.updateList(newList)
+                        , throwable -> {
+                            List<User> error = new LinkedList<>();
+                            if (throwable instanceof NetworkErrorException) {
+                                error.add(UserController.ERROR_USER);
+                                userAdapter.updateList(error);
+                                throw new RuntimeException(throwable);
+                            } else {
+                                error.add(UserController.ERROR_USER);
+                                userAdapter.updateList(error);
+                            }
+                        });
     }
 }
