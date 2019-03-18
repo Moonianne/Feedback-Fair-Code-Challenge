@@ -14,6 +14,8 @@ public final class UserRepository {
             UserRetrofit.getInstance()
                     .create(UserService.class);
 
+    private List<User> userList;
+
     private static UserRepository instance;
 
     private UserRepository() {
@@ -29,5 +31,13 @@ public final class UserRepository {
     public Observable<List<User>> getUsers() {
         return USER_SERVICE.getUsers()
                 .subscribeOn(Schedulers.io());
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

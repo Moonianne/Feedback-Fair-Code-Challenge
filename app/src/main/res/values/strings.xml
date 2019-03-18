@@ -4,4 +4,6 @@
     <string name="email_button">Email</string>
     <string name="phone_string">Phone: %1$s</string>
     <string name="email_string">Email: %1$s</string>
+    <string name="getting_user_list_string">Loading...</string>
+    <string name="network_fail_string">Connection to Server Fail.</string>
 </resources>
