@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public final class UserViewHolder extends RecyclerView.ViewHolder {
+    private static final long DEBOUNCE_TIMEOUT = 300;
 
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -25,10 +26,8 @@ public final class UserViewHolder extends RecyclerView.ViewHolder {
     public void onBind(final User user, final OnUserListClickListener onUserListClickListener) {
         itemView.<TextView>findViewById(R.id.recycler_user_name).setText(user.name);
         RxView.clicks(itemView)
-                .debounce(300L, TimeUnit.MILLISECONDS)
-                .observeOn(Schedulers.io())
+                .debounce(DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS)
                 .map(click -> user)
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(clickedUser -> onUserListClickListener.viewUser(clickedUser));
     }
 }
