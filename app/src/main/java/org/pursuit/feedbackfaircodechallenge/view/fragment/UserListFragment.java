@@ -12,8 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.jetbrains.annotations.NotNull;
 import org.pursuit.feedbackfaircodechallenge.R;
-import org.pursuit.feedbackfaircodechallenge.controller.UserController;
+import org.pursuit.feedbackfaircodechallenge.controller.UserRepository;
 import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
 import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
 import org.pursuit.feedbackfaircodechallenge.model.User;
@@ -22,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public final class UserListFragment extends Fragment {
     private OnUserListClickListener onUserListClickListener;
@@ -29,7 +31,6 @@ public final class UserListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        UserController.getInstance().callUserList();
         if (context instanceof OnUserListClickListener) {
             onUserListClickListener = (OnUserListClickListener) context;
         } else {
@@ -59,20 +60,21 @@ public final class UserListFragment extends Fragment {
     }
 
     private void getUsersFromNetwork(UserAdapter userAdapter) {
-        UserController.getInstance()
-                .callUserList()
+        UserRepository.getInstance()
+                .getUsers()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(newList -> userAdapter.updateList(newList)
-                        , throwable -> {
-                            List<User> error = new LinkedList<>();
-                            if (throwable instanceof NetworkErrorException) {
-                                error.add(UserController.ERROR_USER);
-                                userAdapter.updateList(error);
-                                throw new RuntimeException(throwable);
-                            } else {
-                                error.add(UserController.ERROR_USER);
-                                userAdapter.updateList(error);
-                            }
-                        });
+                        , getErrorThrowable(userAdapter));
+    }
+
+    @NotNull
+    private Consumer<Throwable> getErrorThrowable(UserAdapter userAdapter) {
+        return throwable -> {
+            if (throwable instanceof NetworkErrorException) {
+
+            } else {
+                throw new RuntimeException(throwable);
+            }
+        };
     }
 }

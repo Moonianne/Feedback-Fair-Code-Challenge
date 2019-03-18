@@ -9,6 +9,9 @@ public final class UserRetrofit {
 
     private static Retrofit instance;
 
+    private UserRetrofit() {
+    }
+
     public static Retrofit getInstance() {
         if (instance == null) {
             instance = new Retrofit.Builder()
