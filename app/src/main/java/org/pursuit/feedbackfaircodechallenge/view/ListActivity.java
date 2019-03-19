@@ -1,13 +1,11 @@
 package org.pursuit.feedbackfaircodechallenge.view;
 
-import android.accounts.NetworkErrorException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 import org.pursuit.feedbackfaircodechallenge.R;
-import org.pursuit.feedbackfaircodechallenge.controller.UserAdapter;
 import org.pursuit.feedbackfaircodechallenge.controller.UserRepository;
 import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
 import org.pursuit.feedbackfaircodechallenge.model.User;

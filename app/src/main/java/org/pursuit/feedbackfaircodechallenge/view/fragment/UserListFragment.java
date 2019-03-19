@@ -54,5 +54,4 @@ public final class UserListFragment extends Fragment {
         recyclerView.setAdapter(userAdapter);
     }
 
-
 }

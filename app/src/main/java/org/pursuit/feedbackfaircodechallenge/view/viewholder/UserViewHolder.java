@@ -13,9 +13,6 @@ import org.pursuit.feedbackfaircodechallenge.model.User;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public final class UserViewHolder extends RecyclerView.ViewHolder {
     private static final long DEBOUNCE_TIMEOUT = 300;
 
