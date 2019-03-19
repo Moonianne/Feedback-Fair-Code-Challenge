@@ -1,5 +1,6 @@
 package org.pursuit.feedbackfaircodechallenge.view;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ public final class ListActivity extends AppCompatActivity implements OnUserListC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
 
         getUsersFromNetwork();
     }
@@ -42,16 +43,20 @@ public final class ListActivity extends AppCompatActivity implements OnUserListC
     @NotNull
     private Consumer<Throwable> getErrorThrowable() {
         return throwable ->
-                this.<TextView>findViewById(R.id.text_network_status)
+                this.<TextView>findViewById(R.id.network_loading_string)
                         .setText(getString(R.string.network_fail_string));
     }
 
     private void showUsersList(List<User> newList) {
         UserRepository.getInstance().setUserList(newList);
+        inflateFragment(UserListFragment.newInstance());
+    }
+
+    private void inflateFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.user_list_fragment_container,
-                        UserListFragment.newInstance())
+                        fragment)
                 .commit();
     }
 }

@@ -8,7 +8,7 @@
     tools:context=".view.ListActivity">
 
     <TextView
-        android:id="@+id/text_network_status"
+        android:id="@+id/network_loading_string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

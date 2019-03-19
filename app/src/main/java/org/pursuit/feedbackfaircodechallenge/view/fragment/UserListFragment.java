@@ -19,7 +19,7 @@ import org.pursuit.feedbackfaircodechallenge.listener.OnUserListClickListener;
 public final class UserListFragment extends Fragment {
     private OnUserListClickListener onUserListClickListener;
 
-    public static UserListFragment newInstance(){
+    public static UserListFragment newInstance() {
         return new UserListFragment();
     }
 
@@ -53,5 +53,4 @@ public final class UserListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(userAdapter);
     }
-
 }
